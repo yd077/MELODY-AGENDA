@@ -1,0 +1,5 @@
+{
+  "name": "My Calendar",
+  "description": "A simple Google Calendar viewer that displays your upcoming events.",
+  "requestFramePermissions": []
+}
