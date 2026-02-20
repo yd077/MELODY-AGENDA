@@ -69,46 +69,51 @@ export function EventList({ events }: EventListProps) {
             <div 
               key={event.id}
               onClick={() => setSelectedEvent(event)}
-              className="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:border-blue-100 transition-all cursor-pointer group"
+              className="bg-white rounded-2xl p-6 shadow-sm border border-stone-100 hover:shadow-md hover:border-stone-200 transition-all cursor-pointer group relative overflow-hidden"
             >
+              {/* Decorative accent */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-stone-900 opacity-0 group-hover:opacity-100 transition-opacity" />
+
               <div className="flex items-start justify-between">
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1 truncate group-hover:text-blue-600 transition-colors">
-                    {event.summary || '(No Title)'}
+                <div className="flex-1 min-w-0 pl-2">
+                  <h3 className="text-lg font-semibold text-stone-900 mb-2 truncate group-hover:text-stone-700 transition-colors font-display">
+                    {event.summary || '(Sans titre)'}
                   </h3>
                   
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-gray-500 mt-2">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4 shrink-0" />
-                      <span className="whitespace-nowrap capitalize">{format(startDate, 'd MMM yyyy', { locale: fr })}</span>
+                  <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-stone-500">
+                    <div className="flex items-center gap-2 bg-stone-50 px-3 py-1.5 rounded-md">
+                      <Calendar className="w-4 h-4 shrink-0 text-stone-400" />
+                      <span className="whitespace-nowrap capitalize font-medium">{format(startDate, 'd MMM yyyy', { locale: fr })}</span>
                     </div>
                     
                     {!isAllDay && (
-                      <div className="flex items-center gap-1.5">
-                        <Clock className="w-4 h-4 shrink-0" />
-                        <span className="whitespace-nowrap">{format(startDate, "H'h'mm", { locale: fr })}</span>
+                      <div className="flex items-center gap-2 bg-stone-50 px-3 py-1.5 rounded-md">
+                        <Clock className="w-4 h-4 shrink-0 text-stone-400" />
+                        <span className="whitespace-nowrap font-medium">{format(startDate, "H'h'mm", { locale: fr })}</span>
                       </div>
                     )}
                     
                     {event.location && (
-                      <div className="flex items-center gap-1.5 min-w-0">
-                        <MapPin className="w-4 h-4 shrink-0" />
+                      <div className="flex items-center gap-2 min-w-0">
+                        <MapPin className="w-4 h-4 shrink-0 text-stone-400" />
                         <span className="truncate max-w-[150px] sm:max-w-[200px]">{event.location}</span>
                       </div>
                     )}
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-2 ml-4">
+                <div className="flex items-center gap-3 ml-4 self-center">
                   {hasPhone && (
                     <div 
-                      className="p-2 bg-green-50 text-green-600 rounded-full"
-                      title="Phone number detected"
+                      className="p-2.5 bg-green-50 text-green-700 rounded-full shadow-sm"
+                      title="Numéro détecté"
                     >
-                      <MessageSquare className="w-5 h-5" />
+                      <MessageSquare className="w-4 h-4" />
                     </div>
                   )}
-                  <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-blue-400 transition-colors" />
+                  <div className="p-2 rounded-full text-stone-300 group-hover:text-stone-900 group-hover:bg-stone-100 transition-all">
+                    <ChevronRight className="w-5 h-5" />
+                  </div>
                 </div>
               </div>
             </div>

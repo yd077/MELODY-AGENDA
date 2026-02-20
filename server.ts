@@ -34,6 +34,9 @@ function getOAuthClient() {
 // 1. Get Auth URL
 app.get('/api/auth/google/url', (req, res) => {
   try {
+    if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+        return res.status(500).json({ error: 'Missing Google OAuth credentials' });
+    }
     const oauth2Client = getOAuthClient();
     const url = oauth2Client.generateAuthUrl({
       access_type: 'offline', // Request refresh token

@@ -12,6 +12,14 @@ export function LoginButton({ onLogin }: LoginButtonProps) {
     setLoading(true);
     try {
       const response = await fetch('/api/auth/google/url');
+      
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+         const text = await response.text();
+         console.error('Received non-JSON response:', text);
+         throw new Error('Received unexpected response from server. Please try again.');
+      }
+
       const { url } = await response.json();
       
       // Open popup
@@ -62,10 +70,10 @@ export function LoginButton({ onLogin }: LoginButtonProps) {
     <button
       onClick={handleLogin}
       disabled={loading}
-      className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
+      className="flex items-center gap-3 px-8 py-4 bg-stone-900 text-white rounded-full hover:bg-stone-800 hover:shadow-lg hover:shadow-stone-900/20 transition-all disabled:opacity-50 disabled:shadow-none font-medium text-base tracking-wide"
     >
       <LogIn className="w-5 h-5" />
-      {loading ? 'Connecting...' : 'Connect Google Calendar'}
+      {loading ? 'Connexion en cours...' : 'Connexion Google Agenda'}
     </button>
   );
 }
